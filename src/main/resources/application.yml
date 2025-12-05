@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: space-beauty
+  profiles:
+    active: dev
+  jackson:
+    default-property-inclusion: NON_NULL
+
+nasaApi:
+  base-url: https://api.nasa.gov/planetary/apod
+  api-key: ${NASA_API_KEY}
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    url: jdbc:postgresql://localhost:5432/space
+    username: postgres
+    password: 12345
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
