@@ -4,10 +4,11 @@ import lombok.Builder;
 
 @Builder
 public record SpaceResponse(
-        String date,
-        String explanation,
-        String url,
-        String type,
-        String title) {
+                String date,
+                String explanation,
+                String url,
+                String type,
+                String title,
+                String copyright) {
 
 }

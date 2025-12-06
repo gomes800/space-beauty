@@ -24,6 +24,7 @@ public class SpaceService {
                 .url(response.url())
                 .type(response.type())
                 .title(response.title())
+                .copyright(response.copyright())
                 .build();
     }
 }
