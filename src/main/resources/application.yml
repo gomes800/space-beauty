@@ -26,3 +26,8 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
+api:
+  security:
+    token:
+      secret: dev-secret
+      expiration: 3600000
