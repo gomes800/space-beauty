@@ -1,6 +1,7 @@
 package com.gom.space_beauty.entity;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -36,9 +37,10 @@ public class User implements UserDetails {
     private String name;
     private LocalDate birthDate;
 
+    @Builder.Default
     @ManyToMany()
     @JoinTable(name = "tb_user_favorites", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "space_media_id"))
-    private List<SpaceMedia> favorites;
+    private List<SpaceMedia> favorites = new ArrayList<>();
 
     private String email;
     private String username;

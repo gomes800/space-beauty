@@ -2,6 +2,7 @@ package com.gom.space_beauty.service;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -47,5 +48,16 @@ public class AuthService {
                 .password(encryptedPassword)
                 .build();
         userRepository.save(newUser);
+    }
+
+    public Long getUserId() {
+        var auth = SecurityContextHolder.getContext().getAuthentication();
+
+        if (auth == null || !auth.isAuthenticated() || !(auth.getPrincipal() instanceof User)) {
+            throw new RuntimeException("User not authenticated.");
+        }
+
+        var user = (User) auth.getPrincipal();
+        return user.getId();
     }
 }
