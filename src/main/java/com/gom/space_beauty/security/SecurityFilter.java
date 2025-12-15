@@ -55,4 +55,12 @@ public class SecurityFilter extends OncePerRequestFilter {
         return authHeader.replace("Bearer ", "");
     }
 
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) {
+        String path = request.getServletPath();
+        return "OPTIONS".equalsIgnoreCase(request.getMethod())
+                || "/api/auth/login".equals(path)
+                || "/api/auth/register".equals(path);
+    }
+
 }
