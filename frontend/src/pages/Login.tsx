@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { useNavigate, replace } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { login } from "../api/auth";
+import "../styles/auth.css";
 
 export function Login() {
     const navigate = useNavigate();
@@ -23,34 +24,45 @@ export function Login() {
     }
 
     return (
-        <div style={{ maxWidth: 360, margin: "40px auto" }}>
-        <h1>Login</h1>
+        <div className="auth-container">
+            <div className="auth-card">
+                <h1 className="auth-title">Login</h1>
 
-        <form onSubmit={onSubmit}>
-            <div>
-                <label>User</label>
-                <input value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                autoComplete="username" 
-                />
+                <form onSubmit={onSubmit} className="auth-form">
+                    <div className="form-group">
+                        <label className="form-label">User</label>
+                        <input
+                            className="form-input"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            autoComplete="username"
+                            required
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label className="form-label">Password</label>
+                        <input
+                            className="form-input"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            type="password"
+                            autoComplete="current-password"
+                            required
+                        />
+                    </div>
+
+                    {error && <p className="error-message">{error}</p>}
+
+                    <button className="auth-button" type="submit">
+                        Enter
+                    </button>
+
+                    <p className="auth-link">
+                        Don't have an account? <a href="/register">Register</a>
+                    </p>
+                </form>
             </div>
-
-            <div style={{ marginTop: 12 }}>
-                <label>Password</label>
-                <input 
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                type="password"
-                autoComplete="current-password" 
-                />
-            </div>
-
-            {error && <p style={{ color: "crimson" }}>{error}</p>}
-
-            <button style={{ marginTop: 16 }} type="submit">
-                Enter
-            </button>
-        </form>
-    </div>
+        </div>
     );
 }
